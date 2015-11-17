@@ -1,0 +1,39 @@
+/BGMSC/det/setSlabMaterial Berillium
+
+/BGMSC/det/setSlabThickness 0.0572
+/run/reinitializeGeometry
+/run/beamOn 100000
+
+/BGMSC/det/setSlabThickness 0.1116
+/run/reinitializeGeometry
+/run/beamOn 100000
+
+/BGMSC/det/setSlabThickness 0.6440
+/run/reinitializeGeometry
+/run/beamOn 100000
+
+#/BGMSC/det/setSlabThickness 1.2200
+#/run/reinitializeGeometry
+#/run/beamOn 1000
+
+#/BGMSC/det/setSlabThickness 1.8200
+#/run/reinitializeGeometry
+#/run/beamOn 1000
+
+#/BGMSC/det/setSlabThickness 2.4120
+#/run/reinitializeGeometry
+#/run/beamOn 1000
+
+#/BGMSC/det/setSlabThickness 4.7580
+#/run/reinitializeGeometry
+#/run/beamOn 1000
+
+
+
+
+
+
+
+
+
+
