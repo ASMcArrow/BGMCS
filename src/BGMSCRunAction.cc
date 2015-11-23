@@ -36,7 +36,7 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
     G4String str = ss.str();
     G4String name = material+str;
 
-    G4cout << "id is " << analysisManager->CreateH1(name, name, 1000, -10*mrad, 10*mrad, "rad") << G4endl;
+    G4cout << "id is " << analysisManager->CreateH1(name, name, 500, (G4double)(-20.0*mrad), (G4double)(20.0*mrad), "mrad") << G4endl;
     if (analysisManager->GetNofH1s()-2 >= 0)
         analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
 }

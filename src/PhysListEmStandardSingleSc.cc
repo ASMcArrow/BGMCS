@@ -419,7 +419,7 @@ void PhysListEmStandardSingleSc::ConstructProcess()
             hIoni->SetStepFunction(0.1, 20*um);
 
             // G4CoulombScattering* csc = new G4CoulombScattering();
-            // G4hCoulombScatteringModel* csc_model = new G4hCoulombScatteringModel();
+             G4hCoulombScatteringModel* csc_model = new G4hCoulombScatteringModel();
             // csc->SetEmModel(csc_model, 1);
             // ph->RegisterProcess(csc, particle);
 

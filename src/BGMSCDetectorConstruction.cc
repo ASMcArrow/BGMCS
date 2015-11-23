@@ -28,7 +28,7 @@ BGMSCDetectorConstruction::BGMSCDetectorConstruction()
     this->InitializeMaterials();
 
     SlabMaterial = MaterialMap["Berillium"];
-    SetSlabThickness(0.0572);
+    SetSlabThickness(0.0572*(g/cm2));
     DetectorMessenger = new BGMSCDetectorMessenger(this);
 }
 
@@ -50,9 +50,9 @@ G4VPhysicalVolume* BGMSCDetectorConstruction::Construct()
     worldLogic->SetVisAttributes(visAttributes);
 
     // Material Slab
-    G4Box *materialSlab = new G4Box("MaterialSlab", 5*cm, 5*cm, SlabThickness);
+    G4Box *materialSlab = new G4Box("MaterialSlab", 5*cm, 5*cm, SlabThickness/2.0);
     MaterialLogic = new G4LogicalVolume(materialSlab, SlabMaterial, "MaterialLogic");
-    new G4PVPlacement(0, G4ThreeVector(0, 0, (G4double)(SlabThickness)), MaterialLogic, "MaterialSlab", worldLogic, 0, 0);
+    new G4PVPlacement(0, G4ThreeVector(0, 0, (G4double)(SlabThickness/2.0)), MaterialLogic, "MaterialSlab", worldLogic, 0, 0);
 
     return worldPhys;
 }
@@ -71,9 +71,9 @@ G4Material* BGMSCDetectorConstruction::GetSlabMaterial()
 
 void BGMSCDetectorConstruction::SetSlabThickness(G4double thickness)
 {
-    SlabMassThickness = thickness;
-    SlabThickness = (G4double)(thickness/(SlabMaterial->GetDensity()/(g/cm3)))/cm;
-    G4cout << "Command SetSlabThickness works. The thickness is set: " << SlabThickness/cm << " cm from: " << thickness << G4endl;
+    SlabMassThickness = thickness/(g/cm2);
+    SlabThickness = (G4double)(thickness/SlabMaterial->GetDensity());
+    G4cout << "Command SetSlabThickness works. The thickness is set: " << SlabThickness/cm << " cm from: " << thickness/(g/cm2) << " g/cm2" << G4endl;
 }
 
 G4double BGMSCDetectorConstruction::GetSlabThickness()

@@ -41,7 +41,7 @@ void BGMSCDetectorMessenger::SetNewValue(G4UIcommand* command, G4String newValue
 
     else if (command == SetSlabThicknessCmd)
     {
-        G4double thickness = (SetSlabThicknessCmd->ConvertToDimensionedDouble(newValue))/(g/cm2);
+        G4double thickness = (SetSlabThicknessCmd->ConvertToDimensionedDouble(newValue));
         DetectorConstruction->SetSlabThickness(thickness);
     }
 }

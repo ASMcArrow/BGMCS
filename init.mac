@@ -12,21 +12,21 @@
 /run/reinitializeGeometry
 /run/beamOn 100000
 
-#/BGMSC/det/setSlabThickness 1.2200
-#/run/reinitializeGeometry
-#/run/beamOn 1000
+/BGMSC/det/setSlabThickness 1.2200
+/run/reinitializeGeometry
+/run/beamOn 100000
 
-#/BGMSC/det/setSlabThickness 1.8200
-#/run/reinitializeGeometry
-#/run/beamOn 1000
+/BGMSC/det/setSlabThickness 1.8200
+/run/reinitializeGeometry
+/run/beamOn 100000
 
-#/BGMSC/det/setSlabThickness 2.4120
-#/run/reinitializeGeometry
-#/run/beamOn 1000
+/BGMSC/det/setSlabThickness 2.4120
+/run/reinitializeGeometry
+/run/beamOn 100000
 
-#/BGMSC/det/setSlabThickness 4.7580
-#/run/reinitializeGeometry
-#/run/beamOn 1000
+/BGMSC/det/setSlabThickness 4.7580
+/run/reinitializeGeometry
+/run/beamOn 100000
 
 
 
