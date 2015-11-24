@@ -25,6 +25,8 @@
 #include "BGMSCPrimaryGeneratorAction.hh"
 #include "BGMSCEventAction.hh"
 #include "BGMSCRunAction.hh"
+#include "BGMCSTrackingAction.hh"
+#include "BGMCSTrackingActionMessenger.hh"
 #include "BGMSCActionInitialization.hh"
 
 #include "G4UIbatch.hh"
@@ -52,7 +54,10 @@ int main(int argc,char** argv)
     physicsList->SetVerboseLevel(0);
     runManager->SetUserInitialization(physicsList);
 
-    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld);
+    BGMCSTrackingAction* trackingAction = new BGMCSTrackingAction;
+    BGMCSTrackingActionMessenger* trackingActionMessenger = new BGMCSTrackingActionMessenger(trackingAction);
+
+    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld, trackingAction);
     runManager->SetUserInitialization(actionInit);
     runManager->Initialize();
 
@@ -67,7 +72,22 @@ int main(int argc,char** argv)
     delete ui;
     delete visManager;
 #else
-    UImanager->ApplyCommand("/control/execute init.mac");
+    std::ifstream openfile("Materials.txt");
+    std::string line;
+    while (std::getline(openfile, line))
+    {
+        std::string material = "";
+        std::string thickness = "";
+
+        std::istringstream ss(line);
+        ss >> thickness >> material;
+
+        if(!material.empty())
+            UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
+        UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
+        UImanager->ApplyCommand("/run/reinitializeGeometry");
+        UImanager->ApplyCommand("/run/beamOn 1000");
+    }
 #endif
 
     delete runManager;

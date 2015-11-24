@@ -4,6 +4,7 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4Run.hh"
+#include "G4TrackingManager.hh"
 
 #include "G4CsvAnalysisManager.hh"
 
@@ -34,18 +35,28 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
     std::stringstream ss;
     ss << (int)(thickness*1000);
     G4String str = ss.str();
-    G4String name = material+str;
+    Name = material+str;
 
-    G4cout << "id is " << analysisManager->CreateH1(name, name, 500, (G4double)(-20.0*mrad), (G4double)(20.0*mrad), "mrad") << G4endl;
+    G4cout << "id is " << analysisManager->CreateH1(Name, Name, 500, (G4double)(-20.0*mrad), (G4double)(20.0*mrad), "mrad") << G4endl;
     if (analysisManager->GetNofH1s()-2 >= 0)
         analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
 }
 
 void BGMSCRunAction::EndOfRunAction(const G4Run* aRun)
-{
- //   if(!IsMaster()) return;
-
+{    
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+
     analysisManager->Write();
+
+    if (isMaster)
+    {
+        std::ofstream file;
+        file.open("RMS.txt", std::ios_base::app | std::ios_base::out);
+        file << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << "\n";
+        file.close();
+
+        G4cout << "rms = " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << G4endl;
+    }
+
     analysisManager->CloseFile();
 }

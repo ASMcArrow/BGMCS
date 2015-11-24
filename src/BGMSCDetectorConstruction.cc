@@ -27,7 +27,7 @@ BGMSCDetectorConstruction::BGMSCDetectorConstruction()
 {
     this->InitializeMaterials();
 
-    SlabMaterial = MaterialMap["Berillium"];
+    SlabMaterial = MaterialMap["Beryllium"];
     SetSlabThickness(0.0572*(g/cm2));
     DetectorMessenger = new BGMSCDetectorMessenger(this);
 }
@@ -106,9 +106,9 @@ void BGMSCDetectorConstruction::InitializeMaterials()
 
     // BGMSC Materials
 
-    G4Material* Berillium = new G4Material("Berillium", 4, 9.012*g/mole, 1.853*g/cm3, kStateSolid);
-    Berillium->GetIonisation()->SetMeanExcitationEnergy(63.7*eV);
-    MaterialMap["Berillium"] = Berillium;
+    G4Material* Beryllium = new G4Material("Beryllium", 4, 9.012*g/mole, 1.853*g/cm3, kStateSolid);
+    Beryllium->GetIonisation()->SetMeanExcitationEnergy(63.7*eV);
+    MaterialMap["Beryllium"] = Beryllium;
 
     G4Material* Polystyrene = new G4Material("Polystyrene", 1.032*g/cm3, 2, kStateSolid);
     Polystyrene->AddElement(C, 0.923);

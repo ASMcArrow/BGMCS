@@ -20,7 +20,9 @@ TARGET_LINK_LIBRARIES(BGMSC ${Geant4_LIBRARIES})
 
 set(BGMSC_SCRIPTS
     init_vis.mac
-    init.mac)
+    init.mac
+    ranges.mac
+    Materials.txt)
 
 foreach(_script ${BGMSC_SCRIPTS})
     configure_file(

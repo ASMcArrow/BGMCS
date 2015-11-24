@@ -18,6 +18,7 @@ public:
 
 private:
     BGMSCDetectorConstruction* Geometry;
+    G4String Name;
 };
 
 #endif
