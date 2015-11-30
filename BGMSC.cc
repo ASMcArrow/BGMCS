@@ -74,19 +74,22 @@ int main(int argc,char** argv)
 #else
     std::ifstream openfile("Materials.txt");
     std::string line;
+    G4double sigma;
     while (std::getline(openfile, line))
     {
         std::string material = "";
         std::string thickness = "";
 
-        std::istringstream ss(line);
-        ss >> thickness >> material;
+        std::istringstream iss(line);
+        iss >> thickness >> sigma >> material;
+
+        G4cout << material << " " << thickness << G4endl;
 
         if(!material.empty())
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
         UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
         UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/beamOn 1000");
+        UImanager->ApplyCommand("/run/beamOn 100000");
     }
 #endif
 

@@ -18,6 +18,8 @@ BGMSCRunAction::BGMSCRunAction(BGMSCDetectorConstruction *geometry) : G4UserRunA
 {
     Geometry = geometry;
 
+    Openfile.open("Materials.txt");
+
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
     analysisManager->SetActivation(true);
 }
@@ -34,10 +36,24 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
 
     std::stringstream ss;
     ss << (int)(thickness*1000);
-    G4String str = ss.str();
-    Name = material+str;
+    G4String name = ss.str();
+    Name = material+name;
 
-    G4cout << "id is " << analysisManager->CreateH1(Name, Name, 500, (G4double)(-20.0*mrad), (G4double)(20.0*mrad), "mrad") << G4endl;
+    std::stringstream ss2;
+    ss2 << thickness;
+    G4String str = ss2.str();
+    G4String title = material+" "+str;
+
+    std::string line, notrelevant;
+    G4double sigma;
+    std::getline(Openfile, line);
+
+    std::istringstream iss(line);
+    iss >> notrelevant >> sigma >> notrelevant;
+
+    G4cout << ceil(sigma) << G4endl;
+
+    G4cout << "id is " << analysisManager->CreateH1(Name, title, 1000, (G4double)(-3*ceil(sigma)*mrad), (G4double)(3*ceil(sigma)*mrad), "mrad") << G4endl;
     if (analysisManager->GetNofH1s()-2 >= 0)
         analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
 }
