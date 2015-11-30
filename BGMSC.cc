@@ -29,9 +29,11 @@
 #include "BGMCSTrackingActionMessenger.hh"
 #include "BGMSCActionInitialization.hh"
 
-#include "G4UIbatch.hh"
-#include "G4UImanager.hh"
-#include "G4H1Messenger.hh"
+#include "G4CsvAnalysisManager.hh"
+
+#include <math.h>
+
+static G4double Sigma;
 
 int main(int argc,char** argv)
 {
@@ -74,20 +76,22 @@ int main(int argc,char** argv)
 #else
     std::ifstream openfile("Materials.txt");
     std::string line;
+    G4double sigma;
     while (std::getline(openfile, line))
     {
         std::string material = "";
         std::string thickness = "";
 
-        std::istringstream ss(line);
-        ss >> thickness >> material;
+        std::istringstream iss(line);
+        iss >> thickness >> sigma >> material;
 
         if(!material.empty())
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
         UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
         UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/beamOn 1000");
+        UImanager->ApplyCommand("/run/beamOn 10000");
     }
+    // UImanager->ApplyCommand("/control/execute ranges.mac");
 #endif
 
     delete runManager;

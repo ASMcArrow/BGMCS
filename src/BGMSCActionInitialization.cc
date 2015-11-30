@@ -25,6 +25,6 @@ void BGMSCActionInitialization::Build() const
     SetUserAction(new BGMSCPrimaryGeneratorAction);
     SetUserAction(new BGMSCEventAction);
     SetUserAction(new BGMSCSteppingAction);
-    SetUserAction(TrackingAction);
+    // SetUserAction(TrackingAction);
     SetUserAction(new BGMSCRunAction(Geometry));
 }

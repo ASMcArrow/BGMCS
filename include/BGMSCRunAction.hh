@@ -19,6 +19,7 @@ public:
 private:
     BGMSCDetectorConstruction* Geometry;
     G4String Name;
+    std::ifstream Openfile;
 };
 
 #endif

@@ -17,6 +17,7 @@
 BGMSCRunAction::BGMSCRunAction(BGMSCDetectorConstruction *geometry) : G4UserRunAction()
 {
     Geometry = geometry;
+    Openfile.open("Materials.txt");
 
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
     analysisManager->SetActivation(true);
@@ -28,35 +29,40 @@ BGMSCRunAction::~BGMSCRunAction()
 void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
 {
     G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
+
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
     G4String material = Geometry->GetSlabMaterial()->GetName();
     G4double thickness = Geometry->GetSlabThickness();
 
-    std::stringstream ss;
-    ss << (int)(thickness*1000);
-    G4String str = ss.str();
-    Name = material+str;
+    std::stringstream ss1;
+    ss1 << (int)(thickness*1000);
+    G4String name = ss1.str();
+    Name = material+name;
 
-    G4cout << "id is " << analysisManager->CreateH1(Name, Name, 500, (G4double)(-20.0*mrad), (G4double)(20.0*mrad), "mrad") << G4endl;
+    std::stringstream ss2;
+    ss2 << thickness;
+    G4String str = ss2.str();
+    G4String title = material+" "+str;
+
+    std::string line, notrelevant;
+    G4double sigma;
+    std::getline(Openfile, line);
+
+    std::istringstream iss(line);
+    iss >> notrelevant >> sigma >> notrelevant;
+
+    G4cout << ceil(sigma) << G4endl;
+
+    analysisManager->CreateH1(Name, Name, 500, (G4double)(-10*mrad), (G4double)(10*mrad), "mrad");
     if (analysisManager->GetNofH1s()-2 >= 0)
         analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
 }
 
 void BGMSCRunAction::EndOfRunAction(const G4Run* aRun)
-{    
+{
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
 
     analysisManager->Write();
-
-    if (isMaster)
-    {
-        std::ofstream file;
-        file.open("RMS.txt", std::ios_base::app | std::ios_base::out);
-        file << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << "\n";
-        file.close();
-
-        G4cout << "rms = " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << G4endl;
-    }
-
+    G4cout << "rms " << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << G4endl;
     analysisManager->CloseFile();
 }
