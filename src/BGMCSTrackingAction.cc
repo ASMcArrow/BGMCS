@@ -13,7 +13,7 @@ void BGMCSTrackingAction::Reset()
     G4cout << (G4double)((SumTrack/cm)/NumTrack) << G4endl;
 
     std::ofstream file;
-    file.open("Ranges.txt", std::ios_base::app | std::ios_base::out);
+    file.open("PristineRanges.txt", std::ios_base::app | std::ios_base::out);
     file << Materials[NumMat] << " " << (G4double)((SumTrack/cm)/NumTrack) << " " <<
             Ranges[NumMat]/cm << " " << (G4double)((Ranges[NumMat]/cm - SumTrack/cm/NumTrack)/(Ranges[NumMat]/cm))*100.0 << "\n";
     file.close();
