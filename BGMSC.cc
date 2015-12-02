@@ -1,6 +1,6 @@
 // #undef G4MULTITHREADED
 
-#undef G4VIS_USE
+// #undef G4VIS_USE
 
 #include <cstdio>
 #include <ctime>
@@ -89,7 +89,7 @@ int main(int argc,char** argv)
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
         UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
         UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/beamOn 100000");
+        UImanager->ApplyCommand("/run/beamOn 10");
     }
 #endif
 

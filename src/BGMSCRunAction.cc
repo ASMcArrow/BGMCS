@@ -39,17 +39,18 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
     G4String name = ss.str();
     Name = material+name;
 
-    std::stringstream ss2;
-    ss2 << thickness;
-    G4String str = ss2.str();
-    G4String title = material+" "+str;
-
     std::string line, notrelevant;
     G4double sigma;
     std::getline(Openfile, line);
 
     std::istringstream iss(line);
     iss >> notrelevant >> sigma >> notrelevant;
+
+    std::stringstream ss2;
+    ss2 << thickness << " " << sigma << " ";
+    G4String str = ss2.str();
+    G4String title = material+" "+str;
+    G4cout << "Title is " << title << G4cout;
 
     G4cout << ceil(sigma) << G4endl;
 
