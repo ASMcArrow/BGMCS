@@ -1,6 +1,6 @@
 // #undef G4MULTITHREADED
 
-#undef G4VIS_USE
+// #undef G4VIS_USE
 
 #include <cstdio>
 #include <ctime>
@@ -84,6 +84,8 @@ int main(int argc,char** argv)
 
         std::istringstream iss(line);
         iss >> thickness >> sigma >> material;
+
+        G4cout << material << " " << thickness << G4endl;
 
         if(!material.empty())
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);

@@ -1,119 +1,113 @@
 /BGMSC/det/setSlabMaterial Beryllium
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Polystyrene
-/BGMSC/det/setSlabThickness 20
+/BGMSC/det/setSlabThickness 40
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Carbon
-/BGMSC/det/setSlabThickness 25
+/BGMSC/det/setSlabThickness 50
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Lexan
-/BGMSC/det/setSlabThickness 20
+/BGMSC/det/setSlabThickness 40
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Nylon
-/BGMSC/det/setSlabThickness 100
+/BGMSC/det/setSlabThickness 200
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Lucite
-/BGMSC/det/setSlabThickness 20
-/run/reinitializeGeometry
-/run/beamOn 10000
-/BGMSC/tracking/reset
-
-/BGMSC/det/setSlabMaterial Air
-/BGMSC/det/setSlabThickness 25
+/BGMSC/det/setSlabThickness 40
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Teflon
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Aluminum
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Silicon
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Copper
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Nickel
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Zinc
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Brass
-/BGMSC/det/setSlabThickness 30
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Molybdenum
-/BGMSC/det/setSlabThickness 35
+/BGMSC/det/setSlabThickness 70
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Tin
-/BGMSC/det/setSlabThickness 35
+/BGMSC/det/setSlabThickness 70
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Gadolinium
-/BGMSC/det/setSlabThickness 40
+/BGMSC/det/setSlabThickness 80
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Tantalum
-/BGMSC/det/setSlabThickness 40
+/BGMSC/det/setSlabThickness 80
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Lead
-/BGMSC/det/setSlabThickness 40
+/BGMSC/det/setSlabThickness 80
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
 
 /BGMSC/det/setSlabMaterial Uranium
-/BGMSC/det/setSlabThickness 40
+/BGMSC/det/setSlabThickness 80
 /run/reinitializeGeometry
 /run/beamOn 10000
 /BGMSC/tracking/reset
