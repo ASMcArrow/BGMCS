@@ -17,7 +17,6 @@
 BGMSCRunAction::BGMSCRunAction(BGMSCDetectorConstruction *geometry) : G4UserRunAction()
 {
     Geometry = geometry;
-    Openfile.open("Materials.txt");
 
     Openfile.open("Materials.txt");
 
@@ -36,8 +35,8 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
     G4String material = Geometry->GetSlabMaterial()->GetName();
     G4double thickness = Geometry->GetSlabThickness();
 
-    std::stringstream ss1;
-    ss1 << (int)(thickness*1000);
+    std::stringstream ss;
+    ss << (int)(thickness*1000);
     G4String name = ss.str();
     Name = material+name;
 
@@ -66,7 +65,6 @@ void BGMSCRunAction::EndOfRunAction(const G4Run* aRun)
     G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
 
     analysisManager->Write();
-    G4cout << "rms " << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << G4endl;
 
     if (isMaster)
     {
