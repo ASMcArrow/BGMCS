@@ -50,7 +50,7 @@ G4VPhysicalVolume* BGMSCDetectorConstruction::Construct()
     worldLogic->SetVisAttributes(visAttributes);
 
     // Material Slab
-    G4Box *materialSlab = new G4Box("MaterialSlab", 5*cm, 5*cm, SlabThickness/2.0);
+    G4Box *materialSlab = new G4Box("MaterialSlab", 15*cm, 15*cm, SlabThickness/2.0);
     MaterialLogic = new G4LogicalVolume(materialSlab, SlabMaterial, "MaterialLogic");
     new G4PVPlacement(0, G4ThreeVector(0, 0, (G4double)(SlabThickness/2.0)), MaterialLogic, "MaterialSlab", worldLogic, 0, 0);
 
