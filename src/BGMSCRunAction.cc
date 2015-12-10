@@ -55,7 +55,7 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
 
     G4cout << ceil(sigma) << G4endl;
 
-    G4cout << "id is " << analysisManager->CreateH1(Name, title, 1000, (G4double)(-3*ceil(sigma)*mrad), (G4double)(3*ceil(sigma)*mrad), "mrad") << G4endl;
+    G4cout << "id is " << analysisManager->CreateH1(Name, title, 1000, (G4double)(0*mrad), (G4double)(2.5*ceil(sigma)*mrad), "mrad") << G4endl;
     if (analysisManager->GetNofH1s()-2 >= 0)
         analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
 }

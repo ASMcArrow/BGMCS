@@ -22,7 +22,8 @@ set(BGMSC_SCRIPTS
     init_vis.mac
     init.mac
     ranges.mac
-    Materials.txt)
+    Materials.txt
+    Copper.txt)
 
 foreach(_script ${BGMSC_SCRIPTS})
     configure_file(

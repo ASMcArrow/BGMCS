@@ -142,12 +142,12 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     Nylon->GetIonisation()->SetMeanExcitationEnergy(74*eV);
     MaterialMap["Lucite"] = Lucite;
 
-    G4Material* Air = nistManager->FindOrBuildMaterial("G4_AIR");
-    //    G4Material* Air = new G4Material("Air", 0.001*g/cm3, 3, kStateGas);
-    //    Air->AddElement(N, 0.745);
-    //    Air->AddElement(O, 0.229);
-    //    Air->AddElement(Ar, 0.026);
-    //    Air->GetIonisation()->SetMeanExcitationEnergy(85.7*eV);
+    // G4Material* Air = nistManager->FindOrBuildMaterial("G4_AIR");
+    G4Material* Air = new G4Material("Air", 0.001*g/cm3, 3, kStateGas);
+    Air->AddElement(N, 0.745);
+    Air->AddElement(O, 0.229);
+    Air->AddElement(Ar, 0.026);
+    Air->GetIonisation()->SetMeanExcitationEnergy(85.7*eV);
     MaterialMap["Air"] = Air;
 
     G4Material* Teflon = new G4Material("Teflon", 2.2*g/cm3, 2, kStateSolid);
