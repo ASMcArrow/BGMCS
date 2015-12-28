@@ -24,6 +24,9 @@ public:
     void SetSlabThickness(G4double thickness);
     G4double GetSlabThickness();
 
+    void SetIForCurrentMaterial(G4double I);
+    G4double GetIForCurrentMaterial();
+
  // void ConstructSDandField();
  // This method is used in multi-threaded applications to build
  // per-worker non-shared objects: SensitiveDetectors and Field managers

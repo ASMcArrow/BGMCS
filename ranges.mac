@@ -1,8 +1,8 @@
-#/BGMSC/det/setSlabMaterial Beryllium
-#/BGMSC/det/setSlabThickness 60
-#/run/reinitializeGeometry
-#/run/beamOn 10000
-#/BGMSC/tracking/reset
+/BGMSC/det/setSlabMaterial Beryllium
+/BGMSC/det/setSlabThickness 60
+/run/reinitializeGeometry
+/run/beamOn 1000
+/BGMSC/tracking/reset
 
 #/BGMSC/det/setSlabMaterial Polystyrene
 #/BGMSC/det/setSlabThickness 40
@@ -88,29 +88,29 @@
 #/run/beamOn 10000
 #/BGMSC/tracking/reset
 
-/BGMSC/det/setSlabMaterial Gadolinium
-/BGMSC/det/setSlabThickness 80
-/run/reinitializeGeometry
-/run/beamOn 10000
-/BGMSC/tracking/reset
+#/BGMSC/det/setSlabMaterial Gadolinium
+#/BGMSC/det/setSlabThickness 80
+#/run/reinitializeGeometry
+#/run/beamOn 10000
+#/BGMSC/tracking/reset
 
-/BGMSC/det/setSlabMaterial Tantalum
-/BGMSC/det/setSlabThickness 80
-/run/reinitializeGeometry
-/run/beamOn 10000
-/BGMSC/tracking/reset
+#/BGMSC/det/setSlabMaterial Tantalum
+#/BGMSC/det/setSlabThickness 80
+#/run/reinitializeGeometry
+#/run/beamOn 10000
+#/BGMSC/tracking/reset
 
-/BGMSC/det/setSlabMaterial Lead
-/BGMSC/det/setSlabThickness 80
-/run/reinitializeGeometry
-/run/beamOn 10000
-/BGMSC/tracking/reset
+#/BGMSC/det/setSlabMaterial Lead
+#/BGMSC/det/setSlabThickness 80
+#/run/reinitializeGeometry
+#/run/beamOn 10000
+#/BGMSC/tracking/reset
 
-/BGMSC/det/setSlabMaterial Uranium
-/BGMSC/det/setSlabThickness 80
-/run/reinitializeGeometry
-/run/beamOn 10000
-/BGMSC/tracking/reset
+#/BGMSC/det/setSlabMaterial Uranium
+#/BGMSC/det/setSlabThickness 80
+#/run/reinitializeGeometry
+#/run/beamOn 10000
+#/BGMSC/tracking/reset
 
 
 

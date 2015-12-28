@@ -1,7 +1,7 @@
 /vis/open OGLSQt
 
-/BGMSC/det/setSlabMaterial Polystyrene
-/BGMSC/det/setSlabThickness 15.751
+/BGMSC/det/setSlabMaterial Beryllium
+/BGMSC/det/setSlabThickness 60
 /run/reinitializeGeometry
 
 /vis/drawVolume

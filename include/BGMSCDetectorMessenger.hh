@@ -26,8 +26,10 @@ private:
     BGMSCDetectorConstruction* DetectorConstruction;
     G4UIdirectory* TopDirectory;
     G4UIdirectory* Directory;
+
     G4UIcmdWithAString* SetSlabMaterialCmd;
     G4UIcmdWithADoubleAndUnit* SetSlabThicknessCmd;
+    G4UIcmdWithADoubleAndUnit* SetICmd;
 };
 
 #endif // BGMSCMESSENGER_HH

@@ -10,7 +10,7 @@ BGMSCPrimaryGeneratorAction::BGMSCPrimaryGeneratorAction()
     Source->SetParticleDefinition(G4Proton::Definition());
     Source->SetParticleEnergy(165*MeV);
     Source->SetParticleMomentumDirection(G4ThreeVector(0,0,1));
-    Source->SetParticlePosition(G4ThreeVector(0,0,-1*mm));
+    Source->SetParticlePosition(G4ThreeVector(0,0,1*mm));
 }
 
 BGMSCPrimaryGeneratorAction::~BGMSCPrimaryGeneratorAction()

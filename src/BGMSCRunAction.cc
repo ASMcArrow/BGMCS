@@ -16,12 +16,12 @@
 
 BGMSCRunAction::BGMSCRunAction(BGMSCDetectorConstruction *geometry) : G4UserRunAction()
 {
-    Geometry = geometry;
+//    Geometry = geometry;
 
-    Openfile.open("Materials.txt");
+//    Openfile.open("Materials.txt");
 
-    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
-    analysisManager->SetActivation(true);
+//    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+//    analysisManager->SetActivation(true);
 }
 
 BGMSCRunAction::~BGMSCRunAction()
