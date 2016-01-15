@@ -28,6 +28,6 @@ BGMCSTrackingActionMessenger::~BGMCSTrackingActionMessenger()
 
 void BGMCSTrackingActionMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
-    if(command == ResetCmd)
-        TrackingAction->Reset();
+//    if(command == ResetCmd)
+//        TrackingAction->GetRange();
 }

@@ -28,6 +28,7 @@
 #include "BGMCSTrackingAction.hh"
 #include "BGMCSTrackingActionMessenger.hh"
 #include "BGMSCActionInitialization.hh"
+#include "BGMCSUISession.hh"
 
 #include "G4CsvAnalysisManager.hh"
 #include "G4LossTableManager.hh"
@@ -35,7 +36,12 @@
 
 #include <math.h>
 
-static G4double Sigma;
+// First argument is material
+// Second argument is thickness in g/cm2
+// Third argument is I
+
+G4double SumTrack;
+G4int NumTrack;
 
 int main(int argc,char** argv)
 {
@@ -43,6 +49,17 @@ int main(int argc,char** argv)
     G4Random::setTheEngine(new CLHEP::RanecuEngine);
     G4long seed = time(NULL);
     G4Random::setTheSeed(seed);
+
+    G4double thickness, I;
+
+    std::stringstream ss;
+    ss << argv[2];
+    ss >> thickness;
+    ss.clear();
+    ss << argv[3];
+    ss >> I;
+
+    std::cout << argv[1] << " " << thickness << " " << I << std::endl;
 
 #ifdef G4MULTITHREADED
     G4MTRunManager* runManager = new G4MTRunManager;
@@ -52,6 +69,9 @@ int main(int argc,char** argv)
 #endif
 
     BGMSCDetectorConstruction* massWorld = new BGMSCDetectorConstruction;
+   // massWorld->SetSlabMaterial(G4String(argv[1]));
+   // massWorld->SetSlabThickness(thickness*g/cm2);
+   // massWorld->SetIForCurrentMaterial(I*eV);
     runManager->SetUserInitialization(massWorld);
 
     G4VModularPhysicsList* physicsList = new BGMSCPhysicsList;
@@ -59,14 +79,13 @@ int main(int argc,char** argv)
     runManager->SetUserInitialization(physicsList);
 
     BGMCSTrackingAction* trackingAction = new BGMCSTrackingAction;
-    BGMCSTrackingActionMessenger* trackingActionMessenger = new BGMCSTrackingActionMessenger(trackingAction);
-
-    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld, trackingAction);
+    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(trackingAction);
     runManager->SetUserInitialization(actionInit);
     runManager->Initialize();
-    runManager->SetVerboseLevel(0);
+    runManager->SetVerboseLevel(2);
 
     G4UImanager* UImanager = G4UImanager::GetUIpointer();
+    UImanager->SetCoutDestination(new BGMCSUISession);
 
 #ifdef G4VIS_USE
     G4UIExecutive* ui = new G4UIExecutive(argc, argv);
@@ -77,73 +96,13 @@ int main(int argc,char** argv)
     delete ui;
     delete visManager;
 #else
-    //    std::ifstream openfile("Materials.txt");
-    //    std::string line;
-    //    G4double sigma;
-    //    while (std::getline(openfile, line))
-    //    {
-    //        std::string material = "";
-    //        std::string thickness = "";
+    ::SumTrack = 0;
+    ::NumTrack = 0;
+    runManager->BeamOn(10000);
 
-    //        std::istringstream iss(line);
-    //        iss >> thickness >> sigma >> material;
-
-    //        G4cout << material << " " << thickness << G4endl;
-
-    //        if(!material.empty())
-    //            UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
-    //        UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
-    //        UImanager->ApplyCommand("/run/reinitializeGeometry");
-    //        UImanager->ApplyCommand("/run/beamOn 1000");
-    //    }
-
-    G4double Ranges[20] = {11.3912574204*cm, 16.9612403101*cm, 8.6801801802*cm, 14.7225*cm, 15.2168141593*cm, 14.6533333333*cm, 9.5490909091*cm,
-                           8.2066666667*cm, 9.2738197425*cm, 2.8931919643*cm, 2.7728089888*cm, 3.6429272396*cm, 3.1034279656*cm, 2.7812745098*cm, 4.1325020554*cm,
-                           4.068427673*cm, 2.0445783133*cm, 3.1021145374*cm, 1.966631016*cm};
-    G4double Thickness[20] = {60, 40, 50, 40, 200, 40, 60, 60, 60, 60, 60,
-                              60, 60, 70, 70, 80, 80, 80, 80};
-    G4String Materials[20] = {"Beryllium", "Polystyrene",  "Carbon", "Lexan", "Nylon", "Lucite", "Teflon", "Aluminum", "Silicon",
-                              "Copper", "Nickel", "Zinc", "Brass", "Molybdenum", "Tin", "Gadolinium", "Tantalum", "Lead", "Uranium"};
-    //        for (G4int i = 0; i < 20; i++)
-    //        {
-    //            // First find I that yields bigger range than experimental
-    G4double roof_range = 0;
-
-    //            std::stringstream ss1;
-    //            ss1 << Thickness[i];
-    //            G4String thickness_str = ss1.str();
-
-    UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial Beryllium"/*+Materials[i]*/);
-    UImanager->ApplyCommand("/BGMSC/det/setSlabThickness 60"/*+thickness_str*/);
-
-    G4double I = massWorld->GetIForCurrentMaterial()/eV;
-
-    while (roof_range < Ranges[0])
-    {
-        std::stringstream ss2;
-        ss2 << I;
-        G4String I_str = ss2.str();
-
-       // UImanager->ApplyCommand("/BGMSC/det/setI "+I_str);
-        UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/physicsModified");
-        //            UImanager->ApplyCommand("/run/initialize");
-        UImanager->ApplyCommand("/run/beamOn 10000");
-
-        roof_range = trackingAction->Reset();
-
-        std::ofstream file;
-        file.open("Debug.txt", std::ios_base::app | std::ios_base::out);
-        // file << "I is " << I << "\n";
-        file << "I from DetectorConstruction is " << massWorld->GetIForCurrentMaterial()/eV << "\n";
-        file << "range is " << Ranges[0] << " roof_range is " << roof_range << "\n";
-        file.close();
-
-        I = I*1.5;
-    }
-
-    // G4cout << "Exp range is " << Ranges[i] << " roof_range is " << roof_range << " new I is " << I << G4endl;
-    //}
+    G4double range = (G4double)(::SumTrack/::NumTrack);
+    G4cout << "!!!Number of tracks recorded " << ::NumTrack << G4endl;
+    std::cout << "!!!Range is " << range/cm << std::endl;
 #endif
 
     delete runManager;

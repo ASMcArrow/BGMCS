@@ -3,26 +3,16 @@
 #include "G4TrackStatus.hh"
 #include "G4UImanager.hh"
 
-BGMCSTrackingAction::BGMCSTrackingAction()
-{
-    SumTrack = 0;
-    NumTrack = 0;
-}
+extern G4double SumTrack;
+extern G4int NumTrack;
 
-void BGMCSTrackingAction::PreUserTrackingAction(const G4Track* aTrack)
+BGMCSTrackingAction::BGMCSTrackingAction()
 {
     G4MUTEXINIT(Mutex);
 }
 
-G4double BGMCSTrackingAction::Reset()
-{
-    G4double range = (G4double)(SumTrack/NumTrack);
-
-    SumTrack = 0;
-    NumTrack = 0;
-
-    return range;
-}
+void BGMCSTrackingAction::PreUserTrackingAction(const G4Track* aTrack)
+{}
 
 void BGMCSTrackingAction::PostUserTrackingAction(const G4Track* aTrack)
 {
@@ -30,8 +20,8 @@ void BGMCSTrackingAction::PostUserTrackingAction(const G4Track* aTrack)
     {
         G4AutoLock l(&Mutex);
         G4ThreeVector length = aTrack->GetPosition();
-        NumTrack = NumTrack + 1;
-        SumTrack = SumTrack + length.z()-1*mm;
+        ::NumTrack = ::NumTrack + 1;
+        ::SumTrack = ::SumTrack + length.z()-1*mm;
         l.unlock();
     }
 }

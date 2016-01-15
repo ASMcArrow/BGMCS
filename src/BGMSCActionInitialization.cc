@@ -5,11 +5,10 @@
 #include "BGMSCSteppingAction.hh"
 #include "BGMCSTrackingAction.hh"
 
-BGMSCActionInitialization::BGMSCActionInitialization(BGMSCDetectorConstruction *geometry, BGMCSTrackingAction *trackingAction)
+BGMSCActionInitialization::BGMSCActionInitialization(BGMCSTrackingAction *trackingAction)
     : G4VUserActionInitialization()
 {
-    Geometry = geometry;
-    TrackingAction = trackingAction;
+ //   TrackingAction = trackingAction;
 }
 
 BGMSCActionInitialization::~BGMSCActionInitialization()
@@ -17,7 +16,7 @@ BGMSCActionInitialization::~BGMSCActionInitialization()
 
 void BGMSCActionInitialization::BuildForMaster() const
 {
-    SetUserAction(new BGMSCRunAction(Geometry));
+    //SetUserAction(new BGMSCRunAction(Geometry));
 }
 
 void BGMSCActionInitialization::Build() const
@@ -25,6 +24,6 @@ void BGMSCActionInitialization::Build() const
     SetUserAction(new BGMSCPrimaryGeneratorAction);
     SetUserAction(new BGMSCEventAction);
     // SetUserAction(new BGMSCSteppingAction);
-    SetUserAction(TrackingAction);
+    SetUserAction(new BGMCSTrackingAction);
     // SetUserAction(new BGMSCRunAction(Geometry));
 }

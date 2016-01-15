@@ -9,14 +9,13 @@ class BGMSCActionInitialization : public G4VUserActionInitialization
 {
   public:
 
-    BGMSCActionInitialization(BGMSCDetectorConstruction* geometry, BGMCSTrackingAction* trackingAction);
+    BGMSCActionInitialization(BGMCSTrackingAction* trackingAction);
     virtual ~BGMSCActionInitialization();
 
     virtual void BuildForMaster() const;
     virtual void Build() const;
 
 private:
-    BGMSCDetectorConstruction* Geometry;
     BGMCSTrackingAction* TrackingAction;
 };
 

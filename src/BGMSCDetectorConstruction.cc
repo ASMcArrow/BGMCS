@@ -82,8 +82,9 @@ G4double BGMSCDetectorConstruction::GetSlabThickness()
 }
 
 void BGMSCDetectorConstruction::SetIForCurrentMaterial(G4double I)
-{    
-    MaterialMap[SlabMaterial->GetName()]->GetIonisation()->SetMeanExcitationEnergy(I);
+{
+    if (I !=0)
+        MaterialMap[SlabMaterial->GetName()]->GetIonisation()->SetMeanExcitationEnergy(I);
 }
 
 G4double BGMSCDetectorConstruction::GetIForCurrentMaterial()

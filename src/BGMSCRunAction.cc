@@ -69,7 +69,7 @@ void BGMSCRunAction::EndOfRunAction(const G4Run* aRun)
 //    if (isMaster)
 //    {
 //        std::ofstream file;
-//        file.open("RMS.txt", std::ios_base::app | std::ios_base::out);
+//        file.open("RMS.txt");
 //        file << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << "\n";
 //        file.close();
 
