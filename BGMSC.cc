@@ -69,9 +69,9 @@ int main(int argc,char** argv)
 #endif
 
     BGMSCDetectorConstruction* massWorld = new BGMSCDetectorConstruction;
-   // massWorld->SetSlabMaterial(G4String(argv[1]));
-   // massWorld->SetSlabThickness(thickness*g/cm2);
-   // massWorld->SetIForCurrentMaterial(I*eV);
+    massWorld->SetSlabMaterial(G4String(argv[1]));
+    massWorld->SetSlabThickness(thickness*g/cm2);
+    massWorld->SetIForCurrentMaterial(I*eV);
     runManager->SetUserInitialization(massWorld);
 
     G4VModularPhysicsList* physicsList = new BGMSCPhysicsList;
@@ -98,11 +98,15 @@ int main(int argc,char** argv)
 #else
     ::SumTrack = 0;
     ::NumTrack = 0;
-    runManager->BeamOn(10000);
+    runManager->BeamOn(100000);
 
     G4double range = (G4double)(::SumTrack/::NumTrack);
-    G4cout << "!!!Number of tracks recorded " << ::NumTrack << G4endl;
+    std::cout << "!!!Number of tracks recorded " << ::NumTrack << std::endl;
     std::cout << "!!!Range is " << range/cm << std::endl;
+
+    std::ofstream file("Output.txt", std::ios::app);
+    file << G4String(argv[1]) << " " << (G4double)((range/cm)*(massWorld->GetSlabMaterial()->GetDensity())/(g/cm3)) << " " << massWorld->GetIForCurrentMaterial()/eV << "\n";
+    file.close();
 #endif
 
     delete runManager;

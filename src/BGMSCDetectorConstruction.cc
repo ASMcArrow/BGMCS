@@ -85,6 +85,8 @@ void BGMSCDetectorConstruction::SetIForCurrentMaterial(G4double I)
 {
     if (I !=0)
         MaterialMap[SlabMaterial->GetName()]->GetIonisation()->SetMeanExcitationEnergy(I);
+
+    G4cout << "Command SetIForCirrentMaterial works. I is set to "<< MaterialMap[SlabMaterial->GetName()]->GetIonisation()->GetMeanExcitationEnergy()/eV << G4endl;
 }
 
 G4double BGMSCDetectorConstruction::GetIForCurrentMaterial()
@@ -118,7 +120,7 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     // BGMSC Materials
 
     G4Material* Beryllium = new G4Material("Beryllium", 4, 9.012*g/mole, 1.853*g/cm3, kStateSolid);
-    Beryllium->GetIonisation()->SetMeanExcitationEnergy(220.05*eV);
+    Beryllium->GetIonisation()->SetMeanExcitationEnergy(63.7*eV);
     MaterialMap["Beryllium"] = Beryllium;
 
     G4Material* Polystyrene = new G4Material("Polystyrene", 1.032*g/cm3, 2, kStateSolid);
@@ -143,7 +145,7 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     Nylon->AddElement(O, 0.244);
     Nylon->AddElement(N, 0.107);
     Nylon->AddElement(H, 0.100);
-    Nylon->GetIonisation()->SetMeanExcitationEnergy(63.2*eV);
+    Nylon->GetIonisation()->SetMeanExcitationEnergy(63.9*eV);
     MaterialMap["Nylon"] = Nylon;
 
     G4Material* Lucite = new G4Material("Lucite", 1.2*g/cm3, 3, kStateSolid);

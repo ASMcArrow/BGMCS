@@ -32,7 +32,7 @@ using namespace CLHEP;
 BGMSCPhysicsList::BGMSCPhysicsList() : G4VModularPhysicsList()
 {
   G4LossTableManager::Instance();
-  defaultCutValue = 0.0001*mm;
+  defaultCutValue = 0.01*mm;
   cutForGamma     = defaultCutValue;
   cutForElectron  = defaultCutValue;
   cutForPositron  = defaultCutValue;

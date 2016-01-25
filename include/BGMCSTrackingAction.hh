@@ -5,7 +5,8 @@
 
 #include "G4UserTrackingAction.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4UnitsTable.hh"#include "G4Threading.hh"
+#include "G4UnitsTable.hh"
+#include "G4Threading.hh"
 #include "G4AutoLock.hh"
 
 class BGMCSTrackingAction : public G4UserTrackingAction {
