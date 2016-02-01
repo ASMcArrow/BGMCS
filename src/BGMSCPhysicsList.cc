@@ -42,7 +42,7 @@ BGMSCPhysicsList::BGMSCPhysicsList() : G4VModularPhysicsList()
   emParameters->SetMaxEnergy(200*MeV);
   emParameters->SetNumberOfBinsPerDecade(50);
 
-//  emParameters->SetMuHadLateralDisplacement(true);
+  //  emParameters->SetMuHadLateralDisplacement(true);
 //  emParameters->SetLateralDisplacement(true);
 
 //  emParameters->SetMscStepLimitType(fUseDistanceToBoundary);

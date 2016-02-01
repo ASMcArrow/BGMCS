@@ -16,12 +16,11 @@
 
 BGMSCRunAction::BGMSCRunAction(BGMSCDetectorConstruction *geometry) : G4UserRunAction()
 {
-//    Geometry = geometry;
+    Geometry = geometry;
+    Num_bins = 10000;
 
-//    Openfile.open("Materials.txt");
-
-//    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
-//    analysisManager->SetActivation(true);
+    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+    analysisManager->SetActivation(true);
 }
 
 BGMSCRunAction::~BGMSCRunAction()
@@ -31,50 +30,32 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
 {
     G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
 
-//    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
-//    G4String material = Geometry->GetSlabMaterial()->GetName();
-//    G4double thickness = Geometry->GetSlabThickness();
-
-//    std::stringstream ss;
-//    ss << (int)(thickness*1000);
-//    G4String name = ss.str();
-//    Name = material+name;
-
-//    std::string line, notrelevant;
-//    G4double sigma;
-//    std::getline(Openfile, line);
-
-//    std::istringstream iss(line);
-//    iss >> notrelevant >> sigma >> notrelevant;
-
-//    std::stringstream ss2;
-//    ss2 << thickness << " " << sigma << " ";
-//    G4String str = ss2.str();
-//    G4String title = material+" "+str;
-//    G4cout << "Title is " << title << G4cout;
-
-//    G4cout << ceil(sigma) << G4endl;
-
-//    G4cout << "id is " << analysisManager->CreateH1(Name, title, 1000, (G4double)(-3*ceil(sigma)*mrad), (G4double)(3*ceil(sigma)*mrad), "mrad") << G4endl;
-//    if (analysisManager->GetNofH1s()-2 >= 0)
-//        analysisManager->SetH1Activation(analysisManager->GetNofH1s()-2, false);
+    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+    analysisManager->CreateH1("ProjectedRangeHist", "ProjectedRangeHist", Num_bins, 0.0, Geometry->GetSlabThickness());
 }
 
 void BGMSCRunAction::EndOfRunAction(const G4Run* aRun)
 {
-//    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+    G4CsvAnalysisManager* analysisManager = G4CsvAnalysisManager::Instance();
+    analysisManager->Write();
 
-//    analysisManager->Write();
+    if (isMaster)
+    {
+        G4int max = analysisManager->GetH1(analysisManager->GetH1Id("ProjectedRangeHist"))->max_bin_height();
+        G4int index = 0;
 
-//    if (isMaster)
-//    {
-//        std::ofstream file;
-//        file.open("RMS.txt");
-//        file << Name << " " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << "\n";
-//        file.close();
+        for (G4int i = 0; i < Num_bins; i++)
+        {
+            if (analysisManager->GetH1(analysisManager->GetH1Id("ProjectedRangeHist"))->bins_entries()[i] == max)
+                index = i;
+        }
 
-//        G4cout << "rms = " << analysisManager->GetH1(analysisManager->GetH1Id(Name))->rms() << G4endl;
-//    }
+        G4double range = analysisManager->GetH1(analysisManager->GetH1Id("ProjectedRangeHist"))->bin_center(index);
 
-//    analysisManager->CloseFile();
+        std::ofstream file("Output.txt", std::ios::app);
+        file << range << " " << Geometry->GetIForCurrentMaterial()/eV << "\n";
+        file.close();
+    }
+
+    analysisManager->CloseFile();
 }

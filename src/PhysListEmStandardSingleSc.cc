@@ -416,10 +416,10 @@ void PhysListEmStandardSingleSc::ConstructProcess()
             pmsc->SetSkin(1);
 
             G4hIonisation* hIoni = new G4hIonisation();
-            hIoni->SetStepFunction(0.1, 20*um);
+            hIoni->SetStepFunction(0.01, 10*um);
 
             // G4CoulombScattering* csc = new G4CoulombScattering();
-             G4hCoulombScatteringModel* csc_model = new G4hCoulombScatteringModel();
+            // G4hCoulombScatteringModel* csc_model = new G4hCoulombScatteringModel();
             // csc->SetEmModel(csc_model, 1);
             // ph->RegisterProcess(csc, particle);
 

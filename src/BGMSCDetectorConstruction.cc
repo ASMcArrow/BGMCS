@@ -101,7 +101,6 @@ void BGMSCDetectorConstruction::UpdateGeometry()
 
 void BGMSCDetectorConstruction::InitializeMaterials()
 {
-    // TODO: Add materials form BGMSCS
     G4NistManager* nistManager = G4NistManager::Instance();
 
     G4Element* H = nistManager->FindOrBuildElement(1);
@@ -193,7 +192,7 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     Brass->AddElement(Cu, 0.615);
     Brass->AddElement(Zn, 0.352);
     Brass->AddElement(Pb, 0.033);
-    Brass->GetIonisation()->SetMeanExcitationEnergy(450*eV);
+    Brass->GetIonisation()->SetMeanExcitationEnergy(322*eV);
     // TODO::Mean excitation energy is not known. Calibrate by range: 26.345 g/cm3
     // for energy 158.6 MeV.
     MaterialMap["Brass"] = Brass;

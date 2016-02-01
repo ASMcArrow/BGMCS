@@ -26,7 +26,6 @@
 #include "BGMSCEventAction.hh"
 #include "BGMSCRunAction.hh"
 #include "BGMCSTrackingAction.hh"
-#include "BGMCSTrackingActionMessenger.hh"
 #include "BGMSCActionInitialization.hh"
 #include "BGMCSUISession.hh"
 
@@ -39,9 +38,6 @@
 // First argument is material
 // Second argument is thickness in g/cm2
 // Third argument is I
-
-G4double SumTrack;
-G4int NumTrack;
 
 int main(int argc,char** argv)
 {
@@ -78,14 +74,13 @@ int main(int argc,char** argv)
     physicsList->SetVerboseLevel(0);
     runManager->SetUserInitialization(physicsList);
 
-    BGMCSTrackingAction* trackingAction = new BGMCSTrackingAction;
-    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(trackingAction);
+    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld);
     runManager->SetUserInitialization(actionInit);
     runManager->Initialize();
     runManager->SetVerboseLevel(2);
 
     G4UImanager* UImanager = G4UImanager::GetUIpointer();
-    UImanager->SetCoutDestination(new BGMCSUISession);
+    //UImanager->SetCoutDestination(new BGMCSUISession);
 
 #ifdef G4VIS_USE
     G4UIExecutive* ui = new G4UIExecutive(argc, argv);
@@ -96,17 +91,7 @@ int main(int argc,char** argv)
     delete ui;
     delete visManager;
 #else
-    ::SumTrack = 0;
-    ::NumTrack = 0;
-    runManager->BeamOn(100000);
-
-    G4double range = (G4double)(::SumTrack/::NumTrack);
-    std::cout << "!!!Number of tracks recorded " << ::NumTrack << std::endl;
-    std::cout << "!!!Range is " << range/cm << std::endl;
-
-    std::ofstream file("Output.txt", std::ios::app);
-    file << G4String(argv[1]) << " " << (G4double)((range/cm)*(massWorld->GetSlabMaterial()->GetDensity())/(g/cm3)) << " " << massWorld->GetIForCurrentMaterial()/eV << "\n";
-    file.close();
+    runManager->BeamOn(10000);
 #endif
 
     delete runManager;

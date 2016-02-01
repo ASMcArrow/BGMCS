@@ -18,7 +18,8 @@ public:
 
 private:
     BGMSCDetectorConstruction* Geometry;
-    G4String Name;
+    G4int Num_bins;
+
     std::ifstream Openfile;
 };
 
