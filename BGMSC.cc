@@ -25,8 +25,6 @@
 #include "BGMSCPrimaryGeneratorAction.hh"
 #include "BGMSCEventAction.hh"
 #include "BGMSCRunAction.hh"
-#include "BGMCSTrackingAction.hh"
-#include "BGMCSTrackingActionMessenger.hh"
 #include "BGMSCActionInitialization.hh"
 
 #include "G4CsvAnalysisManager.hh"
@@ -56,10 +54,7 @@ int main(int argc,char** argv)
     physicsList->SetVerboseLevel(0);
     runManager->SetUserInitialization(physicsList);
 
-    BGMCSTrackingAction* trackingAction = new BGMCSTrackingAction;
-    BGMCSTrackingActionMessenger* trackingActionMessenger = new BGMCSTrackingActionMessenger(trackingAction);
-
-    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld, trackingAction);
+    BGMSCActionInitialization* actionInit = new BGMSCActionInitialization(massWorld);
     runManager->SetUserInitialization(actionInit);
     runManager->Initialize();
 
@@ -91,9 +86,8 @@ int main(int argc,char** argv)
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
         UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
         UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/beamOn 100000");
+        UImanager->ApplyCommand("/run/beamOn 1000000");
     }
-    // UImanager->ApplyCommand("/control/execute ranges.mac");
 #endif
 
     delete runManager;

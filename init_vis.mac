@@ -1,7 +1,7 @@
 /vis/open OGLSQt
 
-/BGMSC/det/setSlabMaterial Polystyrene
-/BGMSC/det/setSlabThickness 15.751
+/BGMSC/det/setSlabMaterial Lead
+/BGMSC/det/setSlabThickness 35.26
 /run/reinitializeGeometry
 
 /vis/drawVolume
@@ -9,5 +9,5 @@
 /vis/scene/add/trajectories
 /vis/scene/endOfEventAction accumulate
 
-/run/beamOn 1
+/run/beamOn 100
 

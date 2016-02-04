@@ -88,7 +88,6 @@ void BGMSCDetectorConstruction::UpdateGeometry()
 
 void BGMSCDetectorConstruction::InitializeMaterials()
 {
-    // TODO: Add materials form BGMSCS
     G4NistManager* nistManager = G4NistManager::Instance();
 
     G4Element* H = nistManager->FindOrBuildElement(1);
@@ -104,7 +103,7 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     G4Material* Water = nistManager->FindOrBuildMaterial("G4_WATER");
     MaterialMap["Water"] = Water;
 
-    // BGMSC Materials
+    // BGMCS Materials
 
     G4Material* Beryllium = new G4Material("Beryllium", 4, 9.012*g/mole, 1.853*g/cm3, kStateSolid);
     Beryllium->GetIonisation()->SetMeanExcitationEnergy(63.7*eV);
@@ -180,9 +179,7 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     Brass->AddElement(Cu, 0.615);
     Brass->AddElement(Zn, 0.352);
     Brass->AddElement(Pb, 0.033);
-    Brass->GetIonisation()->SetMeanExcitationEnergy(450*eV);
-    // TODO::Mean excitation energy is not known. Calibrate by range: 26.345 g/cm3
-    // for energy 158.6 MeV.
+    Brass->GetIonisation()->SetMeanExcitationEnergy(330*eV);
     MaterialMap["Brass"] = Brass;
 
     G4Material* Molybdenium = new G4Material("Molybdenum", 42, 95.940*g/mole, 10.200*g/cm3, kStateSolid);

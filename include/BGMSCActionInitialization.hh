@@ -3,13 +3,12 @@
 
 #include "G4VUserActionInitialization.hh"
 #include "BGMSCDetectorConstruction.hh"
-#include "BGMCSTrackingAction.hh"
 
 class BGMSCActionInitialization : public G4VUserActionInitialization
 {
   public:
 
-    BGMSCActionInitialization(BGMSCDetectorConstruction* geometry, BGMCSTrackingAction* trackingAction);
+    BGMSCActionInitialization(BGMSCDetectorConstruction* geometry);
     virtual ~BGMSCActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -17,7 +16,6 @@ class BGMSCActionInitialization : public G4VUserActionInitialization
 
 private:
     BGMSCDetectorConstruction* Geometry;
-    BGMCSTrackingAction* TrackingAction;
 };
 
 #endif // BGMSCACTIONINITIASLIZATION_HH
