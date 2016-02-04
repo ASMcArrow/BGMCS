@@ -106,24 +106,24 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     // BGMCS Materials
 
     G4Material* Beryllium = new G4Material("Beryllium", 4, 9.012*g/mole, 1.853*g/cm3, kStateSolid);
-    Beryllium->GetIonisation()->SetMeanExcitationEnergy(63.7*eV);
+    Beryllium->GetIonisation()->SetMeanExcitationEnergy(58.39*eV);
     MaterialMap["Beryllium"] = Beryllium;
 
     G4Material* Polystyrene = new G4Material("Polystyrene", 1.032*g/cm3, 2, kStateSolid);
     Polystyrene->AddElement(C, 0.923);
     Polystyrene->AddElement(H, 0.077);
-    Polystyrene->GetIonisation()->SetMeanExcitationEnergy(68.7*eV);
+    Polystyrene->GetIonisation()->SetMeanExcitationEnergy(62.98*eV);
     MaterialMap["Polystyrene"] = Polystyrene;
 
     G4Material* Carbon = new G4Material("Carbon", 6, 12.011*g/mole, 2.22*g/cm3, kStateSolid);
-    Carbon->GetIonisation()->SetMeanExcitationEnergy(81*eV);
+    Carbon->GetIonisation()->SetMeanExcitationEnergy(72.92*eV);
     MaterialMap["Carbon"] = Carbon;
 
     G4Material* Lexan = new G4Material("Lexan", 1.2*g/cm3, 3, kStateSolid);
     Lexan->AddElement(C, 0.741);
     Lexan->AddElement(O, 0.185);
     Lexan->AddElement(H, 0.074);
-    Lexan->GetIonisation()->SetMeanExcitationEnergy(73.1*eV);
+    Lexan->GetIonisation()->SetMeanExcitationEnergy(67.01*eV);
     MaterialMap["Lexan"] = Lexan;
 
     G4Material* Nylon = new G4Material("Nylon", 1.13*g/cm3, 4, kStateSolid);
@@ -131,14 +131,14 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     Nylon->AddElement(O, 0.244);
     Nylon->AddElement(N, 0.107);
     Nylon->AddElement(H, 0.100);
-    Nylon->GetIonisation()->SetMeanExcitationEnergy(63.2*eV);
+    Nylon->GetIonisation()->SetMeanExcitationEnergy(64.75*eV);
     MaterialMap["Nylon"] = Nylon;
 
     G4Material* Lucite = new G4Material("Lucite", 1.2*g/cm3, 3, kStateSolid);
     Lucite->AddElement(C, 0.600);
     Lucite->AddElement(O, 0.320);
     Lucite->AddElement(H, 0.081);
-    Nylon->GetIonisation()->SetMeanExcitationEnergy(74*eV);
+    Nylon->GetIonisation()->SetMeanExcitationEnergy(62.83*eV);
     MaterialMap["Lucite"] = Lucite;
 
     // G4Material* Air = nistManager->FindOrBuildMaterial("G4_AIR");
@@ -152,58 +152,58 @@ void BGMSCDetectorConstruction::InitializeMaterials()
     G4Material* Teflon = new G4Material("Teflon", 2.2*g/cm3, 2, kStateSolid);
     Teflon->AddElement(F, 0.760);
     Teflon->AddElement(C, 0.240);
-    Teflon->GetIonisation()->SetMeanExcitationEnergy(99.1*eV);
+    Teflon->GetIonisation()->SetMeanExcitationEnergy(109.01*eV);
     MaterialMap["Teflon"] = Teflon;
 
     G4Material* Aluminum = new G4Material("Aluminum", 13, 26.981*g/mole, 2.700*g/cm3, kStateSolid);
-    Carbon->GetIonisation()->SetMeanExcitationEnergy(166*eV);
+    Carbon->GetIonisation()->SetMeanExcitationEnergy(152.17*eV);
     MaterialMap["Aluminum"] = Aluminum;
 
     G4Material* Silicon = new G4Material("Silicon", 14, 28.086*g/mole, 2.330*g/cm3, kStateSolid);
-    Silicon->GetIonisation()->SetMeanExcitationEnergy(173*eV);
+    Silicon->GetIonisation()->SetMeanExcitationEnergy(158.58*eV);
     MaterialMap["Silicon"] = Silicon;
 
     G4Material* Copper = new G4Material("Copper", 29, 63.540*g/mole, 8.960*g/cm3, kStateSolid);
-    Copper->GetIonisation()->SetMeanExcitationEnergy(322*eV);
+    Copper->GetIonisation()->SetMeanExcitationEnergy(295.17*eV);
     MaterialMap["Copper"] = Copper;
 
     G4Material* Nickel = new G4Material("Nickel", 28, 58.710*g/mole, 8.900*g/cm3, kStateSolid);
-    Nickel->GetIonisation()->SetMeanExcitationEnergy(311*eV);
+    Nickel->GetIonisation()->SetMeanExcitationEnergy(285.08*eV);
     MaterialMap["Nickel"] = Nickel;
 
     G4Material* Zinc = new G4Material("Zinc", 30, 65.370*g/mole, 7.133*g/cm3, kStateSolid);
-    Zinc->GetIonisation()->SetMeanExcitationEnergy(330*eV);
+    Zinc->GetIonisation()->SetMeanExcitationEnergy(302.5*eV);
     MaterialMap["Zinc"] = Zinc;
 
     G4Material* Brass = new G4Material("Brass", 8.489*g/cm3, 3, kStateSolid);
     Brass->AddElement(Cu, 0.615);
     Brass->AddElement(Zn, 0.352);
     Brass->AddElement(Pb, 0.033);
-    Brass->GetIonisation()->SetMeanExcitationEnergy(330*eV);
+    Brass->GetIonisation()->SetMeanExcitationEnergy(329.69*eV);
     MaterialMap["Brass"] = Brass;
 
     G4Material* Molybdenium = new G4Material("Molybdenum", 42, 95.940*g/mole, 10.200*g/cm3, kStateSolid);
-    Molybdenium->GetIonisation()->SetMeanExcitationEnergy(424*eV);
+    Molybdenium->GetIonisation()->SetMeanExcitationEnergy(388.67*eV);
     MaterialMap["Molybdenum"] = Molybdenium;
 
     G4Material* Tin = new G4Material("Tin", 50, 118.690*g/mole, 7.298*g/cm3, kStateSolid);
-    Tin->GetIonisation()->SetMeanExcitationEnergy(488*eV);
+    Tin->GetIonisation()->SetMeanExcitationEnergy(447.33*eV);
     MaterialMap["Tin"] = Tin;
 
     G4Material* Gadolinium = new G4Material("Gadolinium", 64, 157.250*g/mole, 7.950*g/cm3, kStateSolid);
-    Gadolinium->GetIonisation()->SetMeanExcitationEnergy(591*eV);
+    Gadolinium->GetIonisation()->SetMeanExcitationEnergy(541.75*eV);
     MaterialMap["Gadolinium"] = Gadolinium;
 
     G4Material* Tantalim = new G4Material("Tantalum", 73, 180.950*g/mole, 16.600*g/cm3, kStateSolid);
-    Tantalim->GetIonisation()->SetMeanExcitationEnergy(718*eV);
+    Tantalim->GetIonisation()->SetMeanExcitationEnergy(688.08*eV);
     MaterialMap["Tantalum"] = Tantalim;
 
     G4Material* Lead = new G4Material("Lead", 82, 207.190*g/mole, 11.350*g/cm3, kStateSolid);
-    Lead->GetIonisation()->SetMeanExcitationEnergy(823*eV);
+    Lead->GetIonisation()->SetMeanExcitationEnergy(754.42*eV);
     MaterialMap["Lead"] = Lead;
 
     G4Material* Uranium = new G4Material("Uranium", 92, 238.030*g/mole, 18.700*g/cm3, kStateSolid);
-    Uranium->GetIonisation()->SetMeanExcitationEnergy(890*eV);
+    Uranium->GetIonisation()->SetMeanExcitationEnergy(815.83*eV);
     MaterialMap["Uranium"] = Uranium;
 }
 
