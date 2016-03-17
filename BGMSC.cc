@@ -80,13 +80,13 @@ int main(int argc,char** argv)
         std::istringstream iss(line);
         iss >> thickness >> sigma >> material;
 
-        G4cout << material << " " << thickness << G4endl;
+        //G4cout << material << " " << thickness << G4endl;
 
         if(!material.empty())
             UImanager->ApplyCommand("/BGMSC/det/setSlabMaterial "+material);
         UImanager->ApplyCommand("/BGMSC/det/setSlabThickness "+thickness);
         UImanager->ApplyCommand("/run/reinitializeGeometry");
-        UImanager->ApplyCommand("/run/beamOn 1000000");
+        UImanager->ApplyCommand("/run/beamOn 100000");
     }
 #endif
 

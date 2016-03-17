@@ -38,7 +38,7 @@ void BGMSCRunAction::BeginOfRunAction(const G4Run* aRun)
     std::stringstream ss;
     ss << (int)(thickness*1000);
     G4String name = ss.str();
-    Name = material+name;
+    Name = material+name+"_Urban_UseDistToB";
 
     std::string line, notrelevant;
     G4double sigma;

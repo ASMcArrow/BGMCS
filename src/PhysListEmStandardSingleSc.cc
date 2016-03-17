@@ -62,6 +62,7 @@
 #include "G4WentzelVIModel.hh"
 #include "G4CoulombScattering.hh"
 #include "G4hCoulombScatteringModel.hh"
+#include "G4MuMultipleScattering.hh"
 #include "G4eCoulombScatteringModel.hh"
 
 #include "G4eIonisation.hh"
@@ -128,7 +129,9 @@ PhysListEmStandardSingleSc::PhysListEmStandardSingleSc(G4int ver)
     param->SetMaxEnergy(200*MeV);
     param->SetNumberOfBinsPerDecade(20);
     param->ActivateAngularGeneratorForIonisation(true);
+    param->SetMscMuHadStepLimitType(fUseDistanceToBoundary);
     //param->SetMuHadLateralDisplacement(true);
+    //param->SetLateralDisplacement(true);
     //param->SetLatDisplacementBeyondSafety(true);
     SetPhysicsType(bElectromagnetic);
 }
@@ -146,7 +149,9 @@ PhysListEmStandardSingleSc::PhysListEmStandardSingleSc(G4int ver,
     //param->SetMscGeomFactor(50);
     param->SetNumberOfBinsPerDecade(20);
     param->ActivateAngularGeneratorForIonisation(true);
-    // param->SetMuHadLateralDisplacement(true);
+    param->SetMscMuHadStepLimitType(fUseDistanceToBoundary);
+    //param->SetMuHadLateralDisplacement(true);
+    //param->SetLateralDisplacement(true);
     //param->SetLatDisplacementBeyondSafety(true);
     SetPhysicsType(bElectromagnetic);
 }
@@ -210,19 +215,19 @@ void PhysListEmStandardSingleSc::ConstructProcess()
     G4MuMultipleScattering* mumsc = new G4MuMultipleScattering();
     mumsc->AddEmModel(0, new G4WentzelVIModel());
     G4CoulombScattering* muss = new G4CoulombScattering();
-    /*
-  G4MuMultipleScattering* pimsc = new G4MuMultipleScattering();
-  pimsc->AddEmModel(0, new G4WentzelVIModel());
-  G4CoulombScattering* piss = new G4CoulombScattering();
 
-  G4MuMultipleScattering* kmsc = new G4MuMultipleScattering();
-  kmsc->AddEmModel(0, new G4WentzelVIModel());
-  G4CoulombScattering* kss = new G4CoulombScattering();
+    G4MuMultipleScattering* pimsc = new G4MuMultipleScattering();
+    pimsc->AddEmModel(0, new G4WentzelVIModel());
+    G4CoulombScattering* piss = new G4CoulombScattering();
 
-  G4MuMultipleScattering* pmsc = new G4MuMultipleScattering();
-  pmsc->AddEmModel(0, new G4WentzelVIModel());
-  G4CoulombScattering* pss = new G4CoulombScattering();
-  */
+    G4MuMultipleScattering* kmsc = new G4MuMultipleScattering();
+    kmsc->AddEmModel(0, new G4WentzelVIModel());
+    G4CoulombScattering* kss = new G4CoulombScattering();
+
+    G4MuMultipleScattering* pmsc = new G4MuMultipleScattering();
+    pmsc->AddEmModel(0, new G4WentzelVIModel());
+    G4CoulombScattering* pss = new G4CoulombScattering();
+
     G4hMultipleScattering* hmsc = new G4hMultipleScattering("ionmsc");
 
     // energy limits for e+- scattering models
@@ -239,7 +244,7 @@ void PhysListEmStandardSingleSc::ConstructProcess()
 
         if (particleName == "gamma") {
 
-            // Photoelectric
+            //Photoelectric
             G4PhotoElectricEffect* pe = new G4PhotoElectricEffect();
             G4VEmModel* theLivermorePEModel = new G4LivermorePhotoElectricModel();
             pe->SetEmModel(theLivermorePEModel,1);
@@ -388,7 +393,7 @@ void PhysListEmStandardSingleSc::ConstructProcess()
             ph->RegisterProcess(hIoni, particle);
             ph->RegisterProcess(pib, particle);
             ph->RegisterProcess(pip, particle);
-            //ph->RegisterProcess(piss, particle);
+            ph->RegisterProcess(piss, particle);
 
         } else if (particleName == "kaon+" ||
                    particleName == "kaon-" ) {
@@ -401,29 +406,30 @@ void PhysListEmStandardSingleSc::ConstructProcess()
             ph->RegisterProcess(hIoni, particle);
             ph->RegisterProcess(kb, particle);
             ph->RegisterProcess(kp, particle);
-            //ph->RegisterProcess(kss, particle);
+            ph->RegisterProcess(kss, particle);
 
         } else if ((particleName == "proton") ||
                    (particleName == "anti_proton")) {
 
 
-            G4hMultipleScattering* pmsc = new G4hMultipleScattering();
+            G4MuMultipleScattering* pmsc = new G4MuMultipleScattering();
             //pmsc->SetEmModel(new G4WentzelVIModel(),1);
             pmsc->SetEmModel(new G4UrbanMscModel(),1);
-            pmsc->SetStepLimitType(fUseDistanceToBoundary);
-            // pmsc->SetRangeFactor(0.04);
-            pmsc->SetLateralDisplasmentFlag(true);
-            pmsc->SetSkin(1);
+            //pmsc->SetStepLimitType(fUseDistanceToBoundary);
+
+            //pmsc->SetRangeFactor(0.04);
+            //pmsc->SetLateralDisplasmentFlag(true);
+            //pmsc->SetSkin(1);
 
             G4hIonisation* hIoni = new G4hIonisation();
             hIoni->SetStepFunction(0.1, 20*um);
 
-            // G4CoulombScattering* csc = new G4CoulombScattering();
-             G4hCoulombScatteringModel* csc_model = new G4hCoulombScatteringModel();
+            //G4CoulombScattering* csc = new G4CoulombScattering();
+            //G4eCoulombScatteringModel* csc_model = new G4eCoulombScatteringModel();
             // csc->SetEmModel(csc_model, 1);
-            // ph->RegisterProcess(csc, particle);
-
             ph->RegisterProcess(pmsc, particle);
+            //ph->RegisterProcess(csc, particle);
+
             ph->RegisterProcess(hIoni, particle);
             ph->RegisterProcess(pb, particle);
             ph->RegisterProcess(pp, particle);
@@ -461,9 +467,9 @@ void PhysListEmStandardSingleSc::ConstructProcess()
                    particleName == "xi_c+" ||
                    particleName == "xi-" ) {
 
-            ph->RegisterProcess(hmsc, particle);
-            ph->RegisterProcess(new G4hIonisation(), particle);
-            ph->RegisterProcess(pnuc, particle);
+            //            ph->RegisterProcess(hmsc, particle);
+            //            ph->RegisterProcess(new G4hIonisation(), particle);
+            //            ph->RegisterProcess(pnuc, particle);
         }
     }
 
