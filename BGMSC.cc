@@ -91,7 +91,7 @@ int main(int argc,char** argv)
     delete ui;
     delete visManager;
 #else
-    runManager->BeamOn(10000);
+    runManager->BeamOn(100000);
 #endif
 
     delete runManager;
